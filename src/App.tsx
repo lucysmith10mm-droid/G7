@@ -12,6 +12,8 @@ import { ExpandableInfo } from './components/ExpandableInfo';
 import { Footer } from './components/Footer';
 import { AiSupportModal } from './components/AiSupportModal';
 import { DirectMessageModal } from './components/DirectMessageModal';
+import { TopPromoBanner } from './components/TopPromoBanner';
+import { SeeDance30DaysModal } from './components/SeeDance30DaysModal';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { testConnection } from './lib/firebase';
@@ -32,6 +34,7 @@ export default function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isAiChatOpen, setIsAiChatOpen] = useState(false);
   const [isDirectMessageOpen, setIsDirectMessageOpen] = useState(false);
+  const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
   const [comparedModelIds, setComparedModelIds] = useState<string[]>([]);
   const [currentLang, setCurrentLang] = useState<LanguageCode>(() => {
     const saved = localStorage.getItem('sd_lang');
@@ -257,6 +260,12 @@ export default function App() {
   // ABSOLUTELY NO ADMIN ACCESS, BUTTONS, COMPONENT OR RENDERED ADMIN ELEMENTS
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-[#05070F] text-slate-100' : 'bg-[#f4f6fb] text-slate-900'} flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-200 overflow-x-hidden w-full max-w-full relative`}>
+      {/* Animated Top Flash Offer Banner: SEE DANCE 2.5 for 30 Days ($5) */}
+      <TopPromoBanner
+        onOpenOffer={() => setIsPromoModalOpen(true)}
+        isDarkMode={isDarkMode}
+      />
+
       {/* Modern Top Header (Horizontal Logo, Icon-Only Menu Button, Search, Theme Toggle, Sign In) */}
       <MarketplaceNavbar
         onOpenAuth={() => setIsAuthOpen(true)}
@@ -376,6 +385,13 @@ export default function App() {
         onClose={() => setIsDirectMessageOpen(false)}
         isDarkMode={isDarkMode}
         currentLang={currentLang}
+      />
+
+      {/* SEE DANCE 2.5 30-Day Pass $5 Flash Offer Modal (PhonePe & UPI Payment) */}
+      <SeeDance30DaysModal
+        isOpen={isPromoModalOpen}
+        onClose={() => setIsPromoModalOpen(false)}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

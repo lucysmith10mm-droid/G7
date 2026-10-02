@@ -23,8 +23,8 @@ export const OFFICIAL_PLANS: Record<PlanId, PlanConfig> = {
     id: 'PLAN_30_DAYS',
     name: '30 DAYS ACCESS',
     duration: '30 days',
-    amount: 12, // $12 USD
-    amountCents: 1200,
+    amount: 5, // $5 USD Flash Promo
+    amountCents: 500,
     currency: 'USD',
     unlimited: true,
     description: 'Unlimited AI video generation for 30 days with SEE DANCE 2.5 + SEE DANCE 2.0 models.',
